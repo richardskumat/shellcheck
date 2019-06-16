@@ -7,7 +7,7 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update \
     && apt-get install -y --no-install-recommends shellcheck \
     && rm -rf /var/lib/apt/lists/* \
-    && rm -Rf /usr/share/doc && rm -Rf /usr/share/man \
+    && rm -rf /usr/share/doc && rm -rf /usr/share/man \
     && apt-get clean
 RUN useradd -m -s /bin/bash user
 USER user
