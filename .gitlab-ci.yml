@@ -46,6 +46,8 @@
   only:
     - master
   script:
+    - docker build -t $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA .
+    - docker run $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA cat /etc/os-release
     - docker images
     - docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA $CI_REGISTRY_USER/$CI_REGISTRY_IMAGE:latest
     - docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA $CI_REGISTRY_USER/$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
