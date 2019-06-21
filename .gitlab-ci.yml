@@ -46,6 +46,7 @@
   only:
     - master
   script:
+    - docker images
     - docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA $CI_REGISTRY_USER/$CI_REGISTRY_IMAGE:latest
     - docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA $CI_REGISTRY_USER/$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
     - docker push $CI_REGISTRY_USER/$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
