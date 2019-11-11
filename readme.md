@@ -1,21 +1,28 @@
 # shellcheck docker image
 
-Runs shellcheck as user(uid 1000, gid 1000) in a debian ct.
+[![pipeline status](https://gitlab.com/richardskumat/shellcheck/badges/master/pipeline.svg)](https://gitlab.com/richardskumat/shellcheck/commits/master)
 
-The image has:
-- shellcheck
+Runs shellcheck as user(uid 1000, gid 1000) in a debian container.
 
-This image is rebuilt daily.
+Example usage:
 
-# Links
+```bash
+docker run --rm -v $PWD:/tmp/sc qwe1/shellcheck shellcheck -e SC2144 -Cauto -s bash /tmp/sc/script.sh
+```
 
-Github
-
-https://github.com/richardskumat/shellcheck
+## Links to source code and build logs
 
 Gitlab
 
 https://gitlab.com/richardskumat/shellcheck
+
+Gitlab pipelines
+
+https://gitlab.com/richardskumat/shellcheck/pipelines
+
+Github
+
+https://github.com/richardskumat/shellcheck
 
 Travis
 
