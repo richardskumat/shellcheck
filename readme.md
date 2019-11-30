@@ -10,6 +10,12 @@ Example usage:
 docker run --rm -v $PWD:/tmp/sc qwe1/shellcheck shellcheck -e SC2144 -Cauto -s bash /tmp/sc/script.sh
 ```
 
+Another example usage for current directory:
+
+```bash
+docker run -w "/tmp/$(pwd | awk -F'/' '{print $NF}')" -v "$PWD:/tmp/$(pwd | awk -F'/' '{print $NF}')" --rm -ti qwe1/shellcheck shellcheck -Cauto -s bash *.sh
+```
+
 ## Links to source code and build logs
 
 Gitlab
