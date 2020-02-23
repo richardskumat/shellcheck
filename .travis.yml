@@ -15,7 +15,8 @@ before_script:
   - docker info
 
 script:
-  # Run tests.
   - docker build -f $DOCKER_FILE -t $DOCKER_USER/$DOCKER_IMAGE:travis-$DOCKER_FILE .
   - docker images
-  - docker run $DOCKER_USER/$DOCKER_IMAGE:travis-$DOCKER_FILE cat /etc/os-release
+  - docker run --rm $DOCKER_USER/$DOCKER_IMAGE:travis-$DOCKER_FILE cat /etc/os-release
+  - docker run --rm $DOCKER_USER/$DOCKER_IMAGE:buster shellcheck --version
+  - docker run --rm $DOCKER_USER/$DOCKER_IMAGE:sid shellcheck --version
