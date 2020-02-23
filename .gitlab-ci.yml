@@ -32,19 +32,13 @@ push_to_registries:
    - master
  script:
    - echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USER" --password-stdin
-   - docker build -f Dockerfile-debiansid -t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:sid -t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:unstable -t $CI_REGISTRY_IMAGE:sid -t $CI_REGISTRY_IMAGE:unstable .
-   - docker build -f Dockerfile-debian10 -t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:10 -t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:buster -t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:latest -t $CI_REGISTRY_IMAGE:10 -t $CI_REGISTRY_IMAGE:buster -t $CI_REGISTRY_IMAGE:latest .
+   - docker build -f Dockerfile-debiansid -t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:sid -t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:unstable .
+   - docker build -f Dockerfile-debian10 -t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:10 -t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:buster -t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:latest .
    - docker push $DOCKERHUB_USER/$DOCKERHUB_PROJECT:sid
    - docker push $DOCKERHUB_USER/$DOCKERHUB_PROJECT:unstable
    - docker push $DOCKERHUB_USER/$DOCKERHUB_PROJECT:10
    - docker push $DOCKERHUB_USER/$DOCKERHUB_PROJECT:buster
    - docker push $DOCKERHUB_USER/$DOCKERHUB_PROJECT:latest
-   - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" "$CI_REGISTRY" --password-stdin
-   - docker push $CI_REGISTRY_IMAGE:sid
-   - docker push $CI_REGISTRY_IMAGE:unstable
-   - docker push $CI_REGISTRY_IMAGE:10
-   - docker push $CI_REGISTRY_IMAGE:buster
-   - docker push $CI_REGISTRY_IMAGE:latest
 
 test_docker_images:
   stage: test
@@ -52,6 +46,3 @@ test_docker_images:
     - docker run --rm $DOCKERHUB_USER/$DOCKERHUB_PROJECT:sid shellcheck --version
     - docker run --rm $DOCKERHUB_USER/$DOCKERHUB_PROJECT:buster shellcheck --version
     - docker run --rm $DOCKERHUB_USER/$DOCKERHUB_PROJECT:latest shellcheck --version
-    - docker run --rm $CI_REGISTRY_IMAGE:sid shellcheck --version
-    - docker run --rm $CI_REGISTRY_IMAGE:buster shellcheck --version
-    - docker run --rm $CI_REGISTRY_IMAGE:latest shellcheck --version
