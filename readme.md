@@ -30,10 +30,6 @@ Github
 
 https://github.com/richardskumat/shellcheck
 
-Travis
-
-https://travis-ci.org/richardskumat/shellcheck
-
 Dockerhub
 
 https://hub.docker.com/r/qwe1/shellcheck
