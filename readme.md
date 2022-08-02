@@ -16,6 +16,11 @@ Another example usage for current directory:
 docker run -w "/tmp/$(pwd | awk -F'/' '{print $NF}')" -v "$PWD:/tmp/$(pwd | awk -F'/' '{print $NF}')" --rm -ti qwe1/shellcheck shellcheck -Cauto -s bash *.sh
 ```
 
+### Todo
+
+Shellcheck is in the alpine 3.16 repos, so I should rebase the images to alpine
+instead of debian to reduce image size.
+
 ## Links to source code and build logs
 
 Gitlab
