@@ -53,8 +53,8 @@ push_to_registries:
  script:
    - docker buildx build --push -f Dockerfile-debiansid -t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:sid -t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:unstable --platform linux/amd64,linux/arm/v7,linux/arm64 .
    - docker buildx build --push -f Dockerfile-debian11 -t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:11 -t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:bullseye -t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:latest --platform linux/amd64,linux/arm/v7,linux/arm64 .
-   - docker run --rm $DOCKERHUB_USER/$DOCKERHUB_PROJECT:$CI_COMMIT_SHORT_SHA shellcheck --version
-   - docker run --rm $DOCKERHUB_USER/$DOCKERHUB_PROJECT:$CI_COMMIT_SHORT_SHA-sid shellcheck --version
+   - docker run --rm $DOCKERHUB_USER/$DOCKERHUB_PROJECT:11 shellcheck --version
+   - docker run --rm $DOCKERHUB_USER/$DOCKERHUB_PROJECT:sid shellcheck --version
 
 test_docker_images:
   stage: test
