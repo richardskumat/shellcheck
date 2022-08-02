@@ -1,8 +1,8 @@
 ---
-#image: qwe1/debdocker:20.11
+#image: qwe1/debdocker:20.10
 image: crazymax/docker:latest
 services:
-  - name: docker:20.11-dind
+  - name: docker:20.10-dind
     command: ["--experimental"]
 
 variables:
