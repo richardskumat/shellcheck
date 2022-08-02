@@ -35,9 +35,6 @@ stages:
   - push
   - test
 
-before_script:
-  - docker info
-
 build:
   stage: build
   script:
