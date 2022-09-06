@@ -42,9 +42,11 @@ build:
     # - docker buildx build --push -t qwe1/playground:latest -t qwe1/playground:$CI_COMMIT_SHORT_SHA -f Dockerfile --platform linux/amd64,linux/arm/v7,linux/arm64 .
     - docker buildx build --load -t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:$CI_COMMIT_SHORT_SHA -f Dockerfile-debian11 --platform linux/amd64 .
     - docker buildx build --load -t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:$CI_COMMIT_SHORT_SHA-sid -f Dockerfile-debiansid --platform linux/amd64 .
+    - docker buildx build --load -t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:$CI_COMMIT_SHORT_SHA-alpine -f Dockerfile-alpine --platform linux/amd64 .
     - docker images
     - docker run --rm $DOCKERHUB_USER/$DOCKERHUB_PROJECT:$CI_COMMIT_SHORT_SHA shellcheck --version
     - docker run --rm $DOCKERHUB_USER/$DOCKERHUB_PROJECT:$CI_COMMIT_SHORT_SHA-sid shellcheck --version
+    - docker run --rm $DOCKERHUB_USER/$DOCKERHUB_PROJECT:$CI_COMMIT_SHORT_SHA-alpine shellcheck --version
 
 push_to_registries:
  stage: push
@@ -53,8 +55,10 @@ push_to_registries:
  script:
    - docker buildx build --push -f Dockerfile-debiansid -t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:sid -t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:unstable --platform linux/amd64,linux/arm/v7,linux/arm64 .
    - docker buildx build --push -f Dockerfile-debian11 -t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:11 -t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:bullseye -t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:latest --platform linux/amd64,linux/arm/v7,linux/arm64 .
+   - docker buildx build --push -f Dockerfile-alpine -t $DOCKERHUB_USER/$DOCKERHUB_PROJECT:alpine --platform linux/amd64,linux/arm/v7,linux/arm64 .
    - docker run --rm $DOCKERHUB_USER/$DOCKERHUB_PROJECT:11 shellcheck --version
    - docker run --rm $DOCKERHUB_USER/$DOCKERHUB_PROJECT:sid shellcheck --version
+   - docker run --rm $DOCKERHUB_USER/$DOCKERHUB_PROJECT:alpine shellcheck --version
 
 test_docker_images:
   stage: test
@@ -62,3 +66,4 @@ test_docker_images:
     - docker run --rm $DOCKERHUB_USER/$DOCKERHUB_PROJECT:sid shellcheck --version
     - docker run --rm $DOCKERHUB_USER/$DOCKERHUB_PROJECT:bullseye shellcheck --version
     - docker run --rm $DOCKERHUB_USER/$DOCKERHUB_PROJECT:latest shellcheck --version
+    - docker run --rm $DOCKERHUB_USER/$DOCKERHUB_PROJECT:alpine shellcheck --version
