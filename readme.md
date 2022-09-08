@@ -2,7 +2,7 @@
 
 [![pipeline status](https://gitlab.com/richardskumat/shellcheck/badges/master/pipeline.svg)](https://gitlab.com/richardskumat/shellcheck/commits/master)
 
-Runs shellcheck as user(uid 1000, gid 1000) in a debian container.
+Runs shellcheck as user(uid 1000, gid 1000) in a container.
 
 Example usage:
 
